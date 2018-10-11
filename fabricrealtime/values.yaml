@@ -12,9 +12,7 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
-service:
-  type: ClusterIP
-  port: 80
+ingressInternalType: ""
 
 ingress:
   enabled: false
