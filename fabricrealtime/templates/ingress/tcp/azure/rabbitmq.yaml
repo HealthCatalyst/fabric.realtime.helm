@@ -9,7 +9,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal-subnet: {{ .Values.ExternalSubnet }}
   labels:
     dns: rabbitmq
-    expose: external
+    expose: internal
 spec:
   selector:
     app: rabbitmq

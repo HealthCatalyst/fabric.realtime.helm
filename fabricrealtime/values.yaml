@@ -4,15 +4,18 @@
 
 replicaCount: 1
 
-image:
-  repository: nginx
-  tag: stable
-  pullPolicy: IfNotPresent
+images:
+  certificateserver: healthcatalyst/fabric.certificateserver:latest
+  interfaceengine: healthcatalyst/fabric.docker.interfaceengine:latest
+  mysql: healthcatalyst/fabric.realtime.mysql:latest
+  rabbitmq: healthcatalyst/fabric.realtime.rabbitmq:latest
 
 nameOverride: ""
 fullnameOverride: ""
 
 ingressInternalType: ""
+ingressExternalType: ""
+ssl: false
 
 ingress:
   enabled: false

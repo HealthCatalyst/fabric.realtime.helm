@@ -4,7 +4,7 @@ metadata:
 # name for this pod
   name: mysqlserver
 # namespace for this pod
-  namespace: fabricrealtime  
+  namespace: fabricrealtime
   labels:
     app: mysqlserver
 spec:
@@ -13,7 +13,7 @@ spec:
   strategy:
     # We need to kill the existing Pod before creating an new one
     # for the new one to be able to attach the persistent disk.
-    type: Recreate        
+    type: Recreate
   selector:
     matchLabels:
       app: mysqlserver
@@ -26,7 +26,7 @@ spec:
         # name of this pod
         - name: mysqlserver
           # image to pull
-          image: healthcatalyst/fabric.realtime.mysql:latest
+          image: {{ .Values.images.mysql }}
           # specify to always pull a new image
           imagePullPolicy: Always
           # environment variables
@@ -56,8 +56,8 @@ spec:
             - name: mysql-persistent-storage
               # point the /var/lib/mysql folder inside the container to the volume called mysql-persistent-storage
               mountPath: /var/lib/mysql
-              subPath: mysql              
+              subPath: mysql
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
-          claimName: realtime.mysqlserver            
+          claimName: realtime.mysqlserver

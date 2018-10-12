@@ -3,7 +3,7 @@ helm init --upgrade --service-account tiller
 
 helm del --purge fabricrealtime
 
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 10
 
 $namespace = "fabricrealtime"
 
@@ -13,8 +13,12 @@ if ([string]::IsNullOrWhiteSpace($(kubectl get namespace $namespace --ignore-not
 }
 kubectl delete --all 'deployments,pods,services,ingress,persistentvolumeclaims,jobs,cronjobs' --namespace=$namespace --ignore-not-found=true
 
+Start-Sleep -Seconds 10
+
 # can't delete persistent volume claims since they are not scoped to namespace
 kubectl delete 'pv' -l namespace=$namespace --ignore-not-found=true
+
+Start-Sleep -Seconds 10
 
 # Write-Host "First trying a dry-run"
 
@@ -28,9 +32,10 @@ helm install ./fabricrealtime --name fabricrealtime --namespace kube-system `
         --set InternalSubnet="" `
         --set ingressInternalType="public" `
         --set ingressExternalType="public" `
-        --set ssl=0 `
+        --set ssl=true `
         --debug
 
 Write-Host "Listing packages"
 helm list
 
+kubectl get "deployments,pods,services,ingress,secrets" --namespace=$namespace -o wide

@@ -4,7 +4,7 @@ metadata:
 # name for this pod
   name: interfaceengine
 # namespace for this pod
-  namespace: fabricrealtime  
+  namespace: fabricrealtime
   labels:
     app: interfaceengine
 spec:
@@ -13,7 +13,7 @@ spec:
   strategy:
     # We need to kill the existing Pod before creating an new one
     # for the new one to be able to attach the persistent disk.
-    type: Recreate        
+    type: Recreate
   selector:
     matchLabels:
       app: interfaceengine
@@ -26,7 +26,7 @@ spec:
         # name of this pod
         - name: interfaceengine
           # image to pull
-          image: healthcatalyst/fabric.docker.interfaceengine:latest
+          image: {{ .Values.images.interfaceengine }}
           # specify to always pull a new image
           imagePullPolicy: Always
           # environment variables
@@ -53,7 +53,7 @@ spec:
               name: http
             - containerPort: 443
               # name of the port
-              name: https 
+              name: https
             - containerPort: 6661
               # name of the port
-              name: channel 
+              name: channel

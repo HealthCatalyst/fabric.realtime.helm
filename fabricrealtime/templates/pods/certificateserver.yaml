@@ -4,7 +4,7 @@ metadata:
 # name for this pod
   name: certificateserver
 # namespace for this pod
-  namespace: fabricrealtime  
+  namespace: fabricrealtime
   labels:
     app: certificateserver
 spec:
@@ -13,7 +13,7 @@ spec:
   strategy:
     # We need to kill the existing Pod before creating an new one
     # for the new one to be able to attach the persistent disk.
-    type: Recreate        
+    type: Recreate
   selector:
     matchLabels:
       app: certificateserver
@@ -26,7 +26,7 @@ spec:
         # name of this pod
         - name: certificateserver
           # image to pull
-          image: healthcatalyst/fabric.certificateserver:latest
+          image: {{ .Values.images.certificateserver }}
           # specify to always pull a new image
           imagePullPolicy: Always
           # environment variables

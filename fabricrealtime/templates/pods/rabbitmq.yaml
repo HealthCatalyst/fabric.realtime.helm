@@ -4,7 +4,7 @@ metadata:
 # name for this pod
   name: rabbitmq
 # namespace for this pod
-  namespace: fabricrealtime  
+  namespace: fabricrealtime
   labels:
     app: rabbitmq
 spec:
@@ -13,7 +13,7 @@ spec:
   strategy:
     # We need to kill the existing Pod before creating an new one
     # for the new one to be able to attach the persistent disk.
-    type: Recreate        
+    type: Recreate
   selector:
     matchLabels:
       app: rabbitmq
@@ -26,7 +26,7 @@ spec:
         # name of this pod
         - name: rabbitmq
           # image to pull
-          image: healthcatalyst/fabric.realtime.rabbitmq:latest
+          image: {{ .Values.images.rabbitmq }}
           # specify to always pull a new image
           imagePullPolicy: Always
           # environment variables
@@ -62,15 +62,15 @@ spec:
             - name: rabbitmqcert-persistent-storage
               # point the /var/lib/mysql folder inside the container to the volume called mysql-persistent-storage
               mountPath: /opt/healthcatalyst/
-              subPath: certs              
+              subPath: certs
             - name: rabbitmq-persistent-storage
               # point the /var/lib/mysql folder inside the container to the volume called mysql-persistent-storage
               mountPath: /opt/rabbitmq
-              subPath: rabbitmq    
+              subPath: rabbitmq
       volumes:
       - name: rabbitmqcert-persistent-storage
         persistentVolumeClaim:
-          claimName: realtime.rabbitmqcert           
+          claimName: realtime.rabbitmqcert
       - name: rabbitmq-persistent-storage
         persistentVolumeClaim:
-          claimName: realtime.rabbitmq           
+          claimName: realtime.rabbitmq
