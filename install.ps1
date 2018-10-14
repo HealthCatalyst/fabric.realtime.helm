@@ -24,6 +24,7 @@ Start-Sleep -Seconds 10
 
 # helm install ./fabricrealtime --name fabricrealtime --dry-run --namespace kube-system --set key1=val1,key2=val2 --debug
 
+# https://docs.helm.sh/using_helm/
 Write-Host "Now installing for real"
 helm install ./fabricrealtime --name fabricrealtime --namespace kube-system `
         --set ExternalIP="104.42.148.128" `
