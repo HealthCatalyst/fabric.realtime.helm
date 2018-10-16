@@ -9,8 +9,8 @@ metadata:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/add-base-url: "true"
-    nginx.ingress.kubernetes.io/app-root: /rabbitmq
-    # nginx.ingress.kubernetes.io/rewrite-target: /
+    # nginx.ingress.kubernetes.io/base-url-scheme: "http"
+    nginx.ingress.kubernetes.io/rewrite-target: /rabbitmq
       # kubernetes.io/ingress.class: traefik
       # ingress.kubernetes.io/ssl-passthrough: "true"
       # change /certificates to /
