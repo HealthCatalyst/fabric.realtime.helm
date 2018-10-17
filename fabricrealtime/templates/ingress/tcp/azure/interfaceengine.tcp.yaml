@@ -1,0 +1,19 @@
+# ----- Services exposed to the outside world ------
+# solr web server
+kind: Service
+apiVersion: v1
+metadata:
+  name: interfaceenginetcp
+  namespace: fabricrealtime
+  labels:
+    expose: external
+spec:
+  selector:
+    app: interfaceengine
+  ports:
+  - port: 6661
+    # port in the pod we map to
+    targetPort: 6661
+    protocol: TCP
+    name: "channel"
+---

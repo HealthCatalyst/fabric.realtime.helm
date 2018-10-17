@@ -12,10 +12,7 @@ images:
 
 nameOverride: ""
 fullnameOverride: ""
-
-ingressInternalType: ""
-ingressExternalType: ""
-ssl: false
+onprem: false
 
 ingress:
   enabled: false

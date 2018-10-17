@@ -27,13 +27,7 @@ Start-Sleep -Seconds 10
 # https://docs.helm.sh/using_helm/
 Write-Host "Now installing for real"
 helm install ./fabricrealtime --name fabricrealtime --namespace kube-system `
-        --set ExternalIP="104.42.148.128" `
-        --set InternalIP="" `
-        --set ExternalSubnet="" `
-        --set InternalSubnet="" `
-        --set ingressInternalType="public" `
-        --set ingressExternalType="public" `
-        --set ssl=true `
+        --set onprem=true `
         --debug
 
 Write-Host "Listing packages"

@@ -1,0 +1,17 @@
+# ----- Services exposed to the outside world ------
+# solr web server
+kind: Service
+apiVersion: v1
+metadata:
+  name: rabbitmqtcp
+  namespace: fabricrealtime
+  labels:
+    expose: internal
+spec:
+  selector:
+    app: rabbitmq
+  ports:
+  - port: 5671
+    targetPort: 5671
+    protocol: TCP
+---

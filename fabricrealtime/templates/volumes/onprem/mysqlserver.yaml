@@ -1,4 +1,4 @@
-{{ if eq .Values.ingressInternalType "onprem" }}
+{{ if .Values.onprem }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:

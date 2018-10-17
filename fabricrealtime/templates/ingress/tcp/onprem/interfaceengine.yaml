@@ -1,4 +1,4 @@
-{{ if eq .Values.ingressInternalType "onprem" }}
+{{ if .Values.onprem }}
 # https://github.com/kubernetes/contrib/tree/master/for-demos/proxy-to-service
 # https://stackoverflow.com/questions/47057176/how-to-access-kubernetes-service-externally-on-bare-metal-install
 kind: Deployment
