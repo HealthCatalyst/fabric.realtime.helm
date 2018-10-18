@@ -6,7 +6,7 @@ metadata:
   name: rabbitmqtcp
   namespace: fabricrealtime
   labels:
-    expose: internal
+    expose: external
 spec:
   selector:
     app: rabbitmq
@@ -14,4 +14,13 @@ spec:
   - port: 5671
     targetPort: 5671
     protocol: TCP
+    name: tcp
+  - port: 5672
+    targetPort: 5672
+    protocol: TCP
+    name: ssl
+  - port: 15672
+    targetPort: 15672
+    protocol: TCP
+    name: mgmt
 ---
