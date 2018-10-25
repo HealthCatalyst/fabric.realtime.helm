@@ -1,19 +1,18 @@
 # ----- Services exposed to the outside world ------
-# solr web server
 kind: Service
 apiVersion: v1
 metadata:
-  name: interfaceenginetcp
+  name: mysqlseevertcp
   namespace: fabricrealtime
   labels:
     expose: external
 spec:
   selector:
-    app: interfaceengine
+    app: mysqlserver
   ports:
-  - port: 6661
+  - port: 3307
     # port in the pod we map to
-    targetPort: 6661
+    targetPort: 3306
     protocol: TCP
-    name: "channel"
+    name: "mysql"
 ---

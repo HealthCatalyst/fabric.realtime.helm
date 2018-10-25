@@ -1,22 +1,29 @@
-{{ if .Values.onprem }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: realtime.certificateserver
   namespace: fabricrealtime
   labels:
-    type: local
+    type: azure
     namespace: fabricrealtime
 spec:
-  #persistentVolumeReclaimPolicy: Delete
   storageClassName: default
   capacity:
     storage: 1Gi
+  # https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes
   accessModes:
     - ReadWriteMany
+{{ if .Values.onprem }}
   hostPath:
     path: "/mnt/data/fabricrealtime"
+{{ else }}
+  # https://kubernetes.io/docs/api-reference/v1.8/#azurefilepersistentvolumesource-v1-core
+  azureFile:
+    secretName: azure-secret
+    secretNamespace: default
+    shareName: fabricrealtime
+    readOnly: false
+{{ end }}
   claimRef:
     namespace: fabricrealtime
     name: realtime.certificateserver
-{{ end }}

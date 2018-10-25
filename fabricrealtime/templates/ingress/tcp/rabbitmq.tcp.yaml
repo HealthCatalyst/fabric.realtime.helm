@@ -1,5 +1,4 @@
 # ----- Services exposed to the outside world ------
-# solr web server
 kind: Service
 apiVersion: v1
 metadata:
