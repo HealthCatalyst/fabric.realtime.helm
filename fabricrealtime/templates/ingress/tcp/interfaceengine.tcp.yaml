@@ -11,7 +11,6 @@ spec:
     app: interfaceengine
   ports:
   - port: 6661
-    # port in the pod we map to
     targetPort: 6661
     protocol: TCP
     name: "channel"
