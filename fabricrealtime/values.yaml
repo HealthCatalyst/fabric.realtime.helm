@@ -14,6 +14,9 @@ nameOverride: ""
 fullnameOverride: ""
 onprem: false
 
+certificateserver:
+  useExistingCertificate: false
+
 ports:
   interfaceenginessl: 443
 

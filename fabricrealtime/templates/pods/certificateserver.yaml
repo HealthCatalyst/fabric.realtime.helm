@@ -43,6 +43,10 @@ spec:
                   key: password
             - name: CLIENT_CERT_USERNAME
               value: fabricrabbitmquser
+            {{ if .Values.certificateserver.useExistingCertificate }}
+            - name: USE_EXISTING_CERTIFICATE
+              value: "true"
+            {{ end }}
           ports:
             # expose port 3000
             - containerPort: 3000
@@ -50,10 +54,18 @@ spec:
               name: certserver
           volumeMounts:
             - name: certificateserver-persistent-storage
-              # point the /var/lib/mysql folder inside the container to the volume called mysql-persistent-storage
               mountPath: /opt/certs/
               subPath: certs
+            {{ if .Values.certificateserver.useExistingCertificate }}
+            - name: fabric-ssl-download-volume
+              mountPath: /opt/certs/client/
+            {{ end }}
       volumes:
       - name: certificateserver-persistent-storage
         persistentVolumeClaim:
           claimName: realtime.certificateserver
+      {{ if .Values.certificateserver.useExistingCertificate }}
+      - name: fabric-ssl-download-volume
+        secret:
+          secretName: fabric-ssl-download-cert
+      {{ end }}

@@ -59,18 +59,20 @@ spec:
               # name of the port
               name: rabbitmqmgmt
           volumeMounts:
-            - name: rabbitmqcert-persistent-storage
-              # point the /var/lib/mysql folder inside the container to the volume called mysql-persistent-storage
-              mountPath: /opt/healthcatalyst/
-              subPath: certs
+            - name: fabric-ssl-ca-volume
+              mountPath: /opt/healthcatalyst/testca
+            - name: fabric-ssl-cert-volume
+              mountPath: /opt/healthcatalyst/server
             - name: rabbitmq-persistent-storage
-              # point the /var/lib/mysql folder inside the container to the volume called mysql-persistent-storage
               mountPath: /opt/rabbitmq
               subPath: rabbitmq
       volumes:
-      - name: rabbitmqcert-persistent-storage
-        persistentVolumeClaim:
-          claimName: realtime.rabbitmqcert
       - name: rabbitmq-persistent-storage
         persistentVolumeClaim:
           claimName: realtime.rabbitmq
+      - name: fabric-ssl-ca-volume
+        secret:
+          secretName: fabric-ca-cert
+      - name: fabric-ssl-cert-volume
+        secret:
+          secretName: fabric-ssl-cert
