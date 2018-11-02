@@ -23,49 +23,16 @@ spec:
         app: certificateserver
     spec:
       containers:
-        # name of this pod
         - name: certificateserver
-          # image to pull
           image: {{ .Values.images.certificateserver }}
-          # specify to always pull a new image
           imagePullPolicy: Always
-          # environment variables
-          env:
-            - name: CERT_HOSTNAME
-              valueFrom:
-                secretKeyRef:
-                  name: certhostname
-                  key: value
-            - name: CERT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: certpassword
-                  key: password
-            - name: CLIENT_CERT_USERNAME
-              value: fabricrabbitmquser
-            {{ if .Values.certificateserver.useExistingCertificate }}
-            - name: USE_EXISTING_CERTIFICATE
-              value: "true"
-            {{ end }}
           ports:
-            # expose port 3000
             - containerPort: 3000
-              # name of the port
               name: certserver
           volumeMounts:
-            - name: certificateserver-persistent-storage
-              mountPath: /opt/certs/
-              subPath: certs
-            {{ if .Values.certificateserver.useExistingCertificate }}
             - name: fabric-ssl-download-volume
               mountPath: /opt/certs/client/
-            {{ end }}
       volumes:
-      - name: certificateserver-persistent-storage
-        persistentVolumeClaim:
-          claimName: realtime.certificateserver
-      {{ if .Values.certificateserver.useExistingCertificate }}
       - name: fabric-ssl-download-volume
         secret:
           secretName: fabric-ssl-download-cert
-      {{ end }}
