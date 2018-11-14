@@ -2,7 +2,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: mysqlseevertcp
+  name: mysqlservertcp
   namespace: fabricrealtime
   labels:
     expose: external
